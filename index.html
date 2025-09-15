@@ -67,6 +67,17 @@
             background-size: contain;
         }
     </style>
+     <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-center space-x-8">
+                <a href="#home" class="font-montserrat text-white hover:text-pink transition-colors text-sm tracking-wide">TRANG CHỦ</a>
+                <a href="#couple" class="font-montserrat text-white hover:text-pink transition-colors text-sm tracking-wide">CÔ DÂU & CHÚ RỂ</a>
+                <a href="#event" class="font-montserrat text-white hover:text-pink transition-colors text-sm tracking-wide">SỰ KIỆN</a>
+                <a href="#gallery" class="font-montserrat text-white hover:text-pink transition-colors text-sm tracking-wide">ALBUM</a>
+            </div>
+        </div>
+    </nav>
 </head>
 <body class="bg-luxury min-h-screen overflow-x-hidden relative">
     <!-- Sparkle Effects -->
@@ -207,12 +218,59 @@
                     <input type="file" id="photoUpload" accept="image/*" multiple class="hidden" onchange="handlePhotoUpload(event)">
                     
                     <div class="text-center">
-                        <button onclick="document.getElementById('photoUpload').click()" class="bg-transparent border-2 border-gold text-gold hover:bg-gold hover:text-black font-montserrat px-6 py-2 rounded-full transition-all duration-300">
-                            Thêm Ảnh Của Bạn
-                        </button>
                     </div>
                 </div>
                 
+<div class="glass-card rounded-3xl p-8 text-center">
+    <h2 class="font-great-vibes text-4xl mb-6">Đếm Ngược</h2>
+    <div id="countdown" class="flex justify-center gap-8 text-white font-cormorant text-2xl">
+        <div>
+            <span id="days" class="block text-3xl font-bold">00</span>
+            Ngày
+        </div>
+        <div>
+            <span id="hours" class="block text-3xl font-bold">00</span>
+            Giờ
+        </div>
+        <div>
+            <span id="minutes" class="block text-3xl font-bold">00</span>
+            Phút
+        </div>
+        <div>
+            <span id="seconds" class="block text-3xl font-bold">00</span>
+            Giây
+        </div>
+    </div>
+</div>
+
+<script>
+// Đặt ngày giờ sự kiện (ví dụ: 20/10/2025 18:00:00)
+var eventDate = new Date("Oct 20, 2025 18:00:00").getTime();
+
+var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = eventDate - now;
+
+    // Tính toán ngày, giờ, phút, giây
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Gắn vào HTML
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+    // Nếu hết thời gian
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "🎉 Đã đến ngày trọng đại! 🎉";
+    }
+}, 1000);
+</script>
+
                 <!-- RSVP Section -->
                 <div class="text-center fade-in-up" style="animation-delay: 0.8s;">
                     <div class="glass-card rounded-3xl p-8 md:p-12 max-w-2xl mx-auto">
@@ -229,7 +287,6 @@
                 </div>
             </div>
         </section>
-        
         <!-- Footer -->
         <footer class="py-12 text-center">
             <div class="max-w-2xl mx-auto px-4">
